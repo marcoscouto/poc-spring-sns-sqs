@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 public class ConfigQueue {
 
     private final SqsClient client;
+
     @Value("${aws.sqs.queue.name}")
     private String queueName;
 
