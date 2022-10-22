@@ -23,10 +23,8 @@ public class ConfigQueue {
     @PostConstruct
     public void createQueue() {
         log.info("[SQS] creating queue: {}", this.queueName);
-        var request = CreateQueueRequest.builder().queueName("poc-sqs").build();
-
+        var request = CreateQueueRequest.builder().queueName(this.queueName).build();
         var response = this.client.createQueue(request);
-
         log.info("[SQS] Queue created successfully. Url: {}", response.queueUrl());
     }
 
