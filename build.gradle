@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'java'
+	id "io.freefair.lombok" version "6.5.1"
 }
 
 group = 'com.marcoscouto'
@@ -17,8 +18,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// AWS Dependencies
-//	implementation platform('software.amazon.awssdk:bom:2.18.1') to import BOM with version
-//	implementation 'software.amazon.awssdk:aws-sdk-java:2.18.1' to import all services
+	//	implementation platform('software.amazon.awssdk:bom:2.18.1') to import BOM with version
+	//	implementation 'software.amazon.awssdk:aws-sdk-java:2.18.1' to import all services
 	implementation 'software.amazon.awssdk:sns:2.18.1'
 	implementation 'software.amazon.awssdk:sqs:2.18.1'
 

@@ -1,0 +1,4 @@
+aws:
+  sqs:
+    queue:
+      name: poc-sqs
