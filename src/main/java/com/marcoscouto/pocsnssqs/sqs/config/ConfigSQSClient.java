@@ -1,4 +1,4 @@
-package com.marcoscouto.pocsnssqs.sqs;
+package com.marcoscouto.pocsnssqs.sqs.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
