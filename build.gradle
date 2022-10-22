@@ -11,11 +11,19 @@ sourceCompatibility = '17'
 repositories {
 	mavenCentral()
 }
-
 dependencies {
+
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// AWS Dependencies
+//	implementation platform('software.amazon.awssdk:bom:2.18.1') to import BOM with version
+//	implementation 'software.amazon.awssdk:aws-sdk-java:2.18.1' to import all services
+	implementation 'software.amazon.awssdk:sns:2.18.1'
+	implementation 'software.amazon.awssdk:sqs:2.18.1'
+
 }
+
 
 tasks.named('test') {
 	useJUnitPlatform()
