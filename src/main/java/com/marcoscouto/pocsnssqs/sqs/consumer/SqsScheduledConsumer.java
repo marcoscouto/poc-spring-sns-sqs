@@ -23,9 +23,9 @@ public class SqsScheduledConsumer {
         var messages = sqsService.receiveMessages();
 
         messages.forEach(message -> {
-            log.info("[SQS CONSUMER SCHEDULED] Received message {}", message);
+            log.info("[SQS CONSUMER SCHEDULED] Received message: {}", message);
             sqsService.deleteMessage(message);
-            log.info("[SQS CONSUMER SCHEDULED] Deleting message {}", message);
+            log.info("[SQS CONSUMER SCHEDULED] Deleting message: {}", message);
         });
 
     }

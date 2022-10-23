@@ -12,9 +12,12 @@ sourceCompatibility = '17'
 repositories {
 	mavenCentral()
 }
+
 dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'io.awspring.cloud:spring-cloud-aws-autoconfigure:2.4.2'
+	implementation 'io.awspring.cloud:spring-cloud-aws-messaging:2.4.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// AWS Dependencies
@@ -24,7 +27,6 @@ dependencies {
 	implementation 'software.amazon.awssdk:sqs:2.18.1'
 
 }
-
 
 tasks.named('test') {
 	useJUnitPlatform()
