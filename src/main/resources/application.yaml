@@ -2,3 +2,6 @@ aws:
   sqs:
     queue:
       name: poc-sqs
+  sns:
+    topic:
+      name: poc-sns

@@ -8,6 +8,7 @@ import software.amazon.awssdk.services.sqs.model.*;
 import java.util.List;
 
 import static org.springframework.util.Assert.notNull;
+import static software.amazon.awssdk.services.sqs.model.QueueAttributeName.QUEUE_ARN;
 
 @Component
 public class SqsService {
@@ -47,6 +48,15 @@ public class SqsService {
             .build();
 
         sqsClient.deleteMessage(deleteRequest);
+    }
+
+    public String getQueueArn() {
+        var request = GetQueueAttributesRequest.builder()
+            .queueUrl(getQueueUrl())
+            .attributeNames(QUEUE_ARN)
+            .build();
+
+        return sqsClient.getQueueAttributes(request).attributes().get(QUEUE_ARN);
     }
 
     private String getQueueUrl() {
