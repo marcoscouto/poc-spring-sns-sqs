@@ -28,13 +28,17 @@ public class ConfigQueue {
     @PostConstruct
     public void createAndConfigureQueue() {
 
+        final String POLICY_NAME = "AllowSnsMessages";
+        final String PRINCIPAL_PROVIDER = "Service";
+        final String PRINCIPAL_ID = "sns.amazonaws.com";
+
         sqsService.createQueue();
 
-        var policy = new Policy("AllowSnsMessages", List.of(
+        var policy = new Policy(POLICY_NAME, List.of(
             new Statement(Statement.Effect.Allow)
                 .withActions(SQSActions.AllSQSActions)
-                .withPrincipals(new Principal("*"))
-                .withId("AllowSnsMessages")
+                .withPrincipals(new Principal(PRINCIPAL_PROVIDER, PRINCIPAL_ID))
+                .withId(POLICY_NAME)
                 .withResources(new Resource(sqsService.getQueueArn()))
         ));
 

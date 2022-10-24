@@ -18,5 +18,4 @@ public class SqsProducer {
         sqsService.sendMessage(defaultMessage.toJSON());
     }
 
-
 }
