@@ -17,9 +17,10 @@ import static org.springframework.util.Assert.notNull;
 @Component
 public class SnsService {
 
-    private final SnsClient snsClient;
     @Value("${aws.sns.topic.name}")
     private String topicName;
+
+    private final SnsClient snsClient;
 
     public SnsService(SnsClient snsClient) {
         this.snsClient = snsClient;
@@ -27,6 +28,7 @@ public class SnsService {
 
     public void sendNotification(String message){
         notNull(message, "message not be empty");
+        log.info("[SNS] sending message: {}", message);
         var request = PublishRequest.builder()
             .message(message)
             .topicArn(getTopicArn())

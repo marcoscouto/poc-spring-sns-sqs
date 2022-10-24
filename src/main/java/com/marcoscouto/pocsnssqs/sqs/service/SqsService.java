@@ -28,6 +28,7 @@ public class SqsService {
 
     public void sendMessage(String message) {
         notNull(message, "message doesn't be null");
+        log.info("[SQS PRODUCER] sending message: {}", message);
         var request = SendMessageRequest.builder()
             .queueUrl(getQueueUrl())
             .messageBody(message)
@@ -80,6 +81,8 @@ public class SqsService {
     }
 
     public void createQueue() {
+        log.info("[SQS] creating queue: {}", this.queueName);
+
         var request = CreateQueueRequest.builder()
             .queueName(this.queueName)
             .build();
