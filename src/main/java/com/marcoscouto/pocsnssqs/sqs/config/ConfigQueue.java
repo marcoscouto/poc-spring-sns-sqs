@@ -1,32 +1,54 @@
 package com.marcoscouto.pocsnssqs.sqs.config;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import com.amazonaws.auth.policy.Policy;
+import com.amazonaws.auth.policy.Principal;
+import com.amazonaws.auth.policy.Resource;
+import com.amazonaws.auth.policy.Statement;
+import com.amazonaws.auth.policy.actions.SQSActions;
+import com.marcoscouto.pocsnssqs.sqs.service.SqsService;
 import org.springframework.context.annotation.Configuration;
-import software.amazon.awssdk.services.sqs.SqsClient;
-import software.amazon.awssdk.services.sqs.model.CreateQueueRequest;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
+import java.util.Map;
 
-@Slf4j
+import static java.lang.Boolean.FALSE;
+import static software.amazon.awssdk.services.sqs.model.QueueAttributeName.POLICY;
+import static software.amazon.awssdk.services.sqs.model.QueueAttributeName.SQS_MANAGED_SSE_ENABLED;
+
 @Configuration
 public class ConfigQueue {
 
-    private final SqsClient client;
+    private final SqsService sqsService;
 
-    @Value("${aws.sqs.queue.name}")
-    private String queueName;
-
-    public ConfigQueue(SqsClient client) {
-        this.client = client;
+    public ConfigQueue(SqsService sqsService) {
+        this.sqsService = sqsService;
     }
 
     @PostConstruct
-    public void createQueue() {
-        log.info("[SQS] creating queue: {}", this.queueName);
-        var request = CreateQueueRequest.builder().queueName(this.queueName).build();
-        var response = this.client.createQueue(request);
-        log.info("[SQS] Queue created successfully. Url: {}", response.queueUrl());
+    public void createAndConfigureQueue() {
+
+        final String POLICY_NAME = "AllowSnsMessages";
+        final String PRINCIPAL_PROVIDER = "Service";
+        final String PRINCIPAL_ID = "sns.amazonaws.com";
+
+        sqsService.createQueue();
+
+        var policy = new Policy(POLICY_NAME, List.of(
+            new Statement(Statement.Effect.Allow)
+                .withActions(SQSActions.AllSQSActions)
+                .withPrincipals(new Principal(PRINCIPAL_PROVIDER, PRINCIPAL_ID))
+                .withId(POLICY_NAME)
+                .withResources(new Resource(sqsService.getQueueArn()))
+        ));
+
+        var attributes = Map.of(
+            SQS_MANAGED_SSE_ENABLED, FALSE.toString(),
+            POLICY, policy.toJson()
+        );
+
+        sqsService.setQueueAttributes(attributes);
+
     }
 
 }
