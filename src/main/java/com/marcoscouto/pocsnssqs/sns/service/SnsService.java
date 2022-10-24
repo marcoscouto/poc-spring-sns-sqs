@@ -5,8 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.services.sns.SnsClient;
+import software.amazon.awssdk.services.sns.model.CreateTopicRequest;
 import software.amazon.awssdk.services.sns.model.PublishRequest;
 import software.amazon.awssdk.services.sns.model.SubscribeRequest;
+
+import java.util.Map;
 
 import static org.springframework.util.Assert.notNull;
 
@@ -52,13 +55,21 @@ public class SnsService {
         var request = SubscribeRequest.builder()
             .protocol(SnsProtocol.SQS.name())
             .endpoint(sqsArn)
+            .attributes(Map.of("RawMessageDelivery", "true"))
             .returnSubscriptionArn(true)
             .topicArn(getTopicArn())
             .build();
 
         var response = snsClient.subscribe(request);
 
-        log.info("[SNS] sqs queue has subscribed successfully, {}", response.sdkHttpResponse().statusText().orElse(sqsArn));
+        log.info("[SNS] sqs queue has subscribed successfully, arn: {}", response.subscriptionArn());
+    }
+
+    public void createTopic() {
+        log.info("[SNS] creating topic: {}", this.topicName);
+        var request = CreateTopicRequest.builder().name(this.topicName).build();
+        var response = snsClient.createTopic(request);
+        log.info("[SNS] topic created successfully, topic arn: {}", response.topicArn());
     }
 
     private String getTopicArn() {
