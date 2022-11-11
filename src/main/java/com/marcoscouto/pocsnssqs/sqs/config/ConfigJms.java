@@ -19,7 +19,7 @@ import static javax.jms.Session.CLIENT_ACKNOWLEDGE;
 public class ConfigJms {
 
     // https://aws.amazon.com/pt/blogs/developer/using-amazon-sqs-with-spring-boot-and-spring-jms/
-
+    // https://docs.aws.amazon.com/pt_br/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-jms-client-with-sqs-clients.html
     private final SqsClient sqsClient;
 
     public ConfigJms(SqsClient sqsClient) {
