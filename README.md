@@ -5,7 +5,7 @@
 - [Java 17+](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 - [Gradle 7.5.1+](https://gradle.org/) - or use gradle wrapper
 - [AWS CLI 2.8.5+](https://aws.amazon.com/pt/cli/)
-- [Docker and Docker Compose](https://www.docker.com/) - if you'll use localstack
+- [Docker 20.10.21+ and Docker Compose v2.12.2+](https://www.docker.com/) - if you'll use localstack
 
 ### Configuration
 
