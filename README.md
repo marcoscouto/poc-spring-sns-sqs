@@ -28,7 +28,7 @@ The project also have:
 
 When you start the project you are able to see the logs that shows producers and consumers working.
 
-**PS:** Default host is configure to localstack, you can change it replacing the environments variables on application.yaml file.
+**PS:** Default host is configure to localstack environment, you can change it replacing the environments variables on application.yaml file.
 
 ### Pay attention if you'll use AWS environment
 
