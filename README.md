@@ -34,4 +34,4 @@ When you start the project you are able to see the logs that shows producers and
 
 - Some AWS services are free to use until certain limit, but before run this project is really important [check the pricing policy on official site.](https://aws.amazon.com/pt/free/?nc2=h_ql_pr_ft&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all) 
 
-- After use this project you must delete or inactivate the services created for avoid billing.
+- After use this project you must delete or inactivate the services created for avoid unexpected charges.
