@@ -55,7 +55,7 @@ public class SnsService {
         notNull(sqsArn, "sqs arn not be empty");
         log.info("[SNS] subscribing sqs queue: {}", sqsArn);
         var request = SubscribeRequest.builder()
-            .protocol(SnsProtocol.SQS.name())
+            .protocol(SnsProtocol.SQS.name().toLowerCase())
             .endpoint(sqsArn)
             .attributes(Map.of("RawMessageDelivery", "true"))
             .returnSubscriptionArn(true)

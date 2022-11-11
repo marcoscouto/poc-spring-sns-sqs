@@ -1,7 +1,9 @@
 aws:
   sqs:
+    host: ${SQS_URI:http://localhost:4566} # https://sqs.{region}.amazonaws.com - Example: https://sqs.sa-east-1.amazonaws.com
     queue:
       name: poc-sqs
   sns:
+    host: ${SNS_URI:http://localhost:4566} # https://sns.{region}.amazonaws.com - Example: https://sns.sa-east-1.amazonaws.com
     topic:
       name: poc-sns
