@@ -5,12 +5,15 @@
 - [Java 17+](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 - [Gradle 7.5.1+](https://gradle.org/) - or use gradle wrapper
 - [AWS CLI 2.8.5+](https://aws.amazon.com/pt/cli/)
+- [Docker and Docker Compose](https://www.docker.com/) - if you'll use localstack
 
 ### Configuration
 
-Before run this project you need to configure aws credentials and region.
+Before run this project you need:
 
-For configure your aws follow the [tutorial](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)
+- Configure aws credentials and region, [following the tutorial](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)
+
+- (optional) Execute docker-compose to initialize [localstack](https://github.com/localstack/localstack).
 
 ### How this project works
 
@@ -25,7 +28,9 @@ The project also have:
 
 When you start the project you are able to see the logs that shows producers and consumers working.
 
-### Pay attention
+**PS:** Default host is configure to localstack, you can change it replacing the environments variables on application.yaml file.
+
+### Pay attention if you'll use AWS environment
 
 - Some AWS components are free to use until certain limit, but before run this project is really important [check the services charges on official site.](https://aws.amazon.com/pt/free/?nc2=h_ql_pr_ft&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all) 
 
