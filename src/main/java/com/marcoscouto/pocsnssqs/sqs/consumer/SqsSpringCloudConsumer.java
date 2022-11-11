@@ -14,7 +14,7 @@ import static io.awspring.cloud.messaging.listener.SqsMessageDeletionPolicy.ON_S
 @Component
 public class SqsSpringCloudConsumer {
 
-    @SqsListener(value = "${aws.sqs.queue.name}", deletionPolicy = ON_SUCCESS)
+//    @SqsListener(value = "${aws.sqs.queue.name}", deletionPolicy = ON_SUCCESS)
     public void receiveMessage(@Payload String message, @Headers Map<String, Object> headers) {
         log.info("[SQS CONSUMER SPRING CLOUD] Received message: {}", message);
     }
