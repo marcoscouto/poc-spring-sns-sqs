@@ -48,6 +48,9 @@ public class PocSnsSqsApplication implements CommandLineRunner {
         // send sqs message
         sqsProducer.sendMessage("This is a SQS message");
 
+        // send sqs message with template
+        sqsProducer.sendMessageWithTemplate("This is a SQS message with template");
+
         // send sns notification
         snsProducer.sendNotification("This is a SNS message");
 

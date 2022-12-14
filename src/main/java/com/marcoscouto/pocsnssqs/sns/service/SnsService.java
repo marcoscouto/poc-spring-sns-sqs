@@ -28,7 +28,7 @@ public class SnsService {
 
     public void sendNotification(String message){
         notNull(message, "message not be empty");
-        log.info("[SNS] sending message: {}", message);
+        log.info("[SNS] sending message to topic {}, message {}", topicName, message);
         var request = PublishRequest.builder()
             .message(message)
             .topicArn(getTopicArn())

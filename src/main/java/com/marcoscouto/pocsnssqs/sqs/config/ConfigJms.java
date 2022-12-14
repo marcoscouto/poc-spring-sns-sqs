@@ -2,7 +2,6 @@ package com.marcoscouto.pocsnssqs.sqs.config;
 
 import com.amazon.sqs.javamessaging.ProviderConfiguration;
 import com.amazon.sqs.javamessaging.SQSConnectionFactory;
-import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
@@ -11,7 +10,6 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.destination.DynamicDestinationResolver;
 import software.amazon.awssdk.services.sqs.SqsClient;
 
-import static com.amazonaws.services.s3.model.Region.SA_SaoPaulo;
 import static javax.jms.Session.CLIENT_ACKNOWLEDGE;
 
 @EnableJms
@@ -42,7 +40,7 @@ public class ConfigJms {
         return new JmsTemplate(this.sqsConnectionFactory());
     }
 
-    private SQSConnectionFactory sqsConnectionFactory(){
+    private SQSConnectionFactory sqsConnectionFactory() {
         return new SQSConnectionFactory(new ProviderConfiguration(), sqsClient);
     }
 

@@ -1,7 +1,9 @@
 package com.marcoscouto.pocsnssqs.sqs.service;
 
+import io.awspring.cloud.messaging.core.QueueMessagingTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.*;
@@ -19,22 +21,34 @@ import static software.amazon.awssdk.services.sqs.model.QueueAttributeName.QUEUE
 public class SqsService {
 
     private final SqsClient sqsClient;
+
+    private final QueueMessagingTemplate template;
     @Value("${aws.sqs.queue.name}")
     private String queueName;
 
-    public SqsService(SqsClient sqsClient) {
+    public SqsService(SqsClient sqsClient, QueueMessagingTemplate template) {
         this.sqsClient = sqsClient;
+        this.template = template;
     }
 
     public void sendMessage(String message) {
         notNull(message, "message doesn't be null");
-        log.info("[SQS PRODUCER] sending message: {}", message);
+        log.info("[SQS PRODUCER] sending message to queue {}, message {}", queueName, message);
         var request = SendMessageRequest.builder()
             .queueUrl(getQueueUrl())
             .messageBody(message)
             .build();
 
         sqsClient.sendMessage(request);
+    }
+
+    public void sendMessageWithTemplate(String message) {
+        notNull(message, "message doesn't be null");
+        log.info("[SQS PRODUCER] sending message with template to queue {}, message {}", queueName, message);
+        var messageRequest = MessageBuilder
+            .withPayload(message)
+            .build();
+        template.convertAndSend(queueName, messageRequest);
     }
 
     public List<Message> receiveMessages() {

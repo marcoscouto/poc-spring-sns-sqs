@@ -18,4 +18,9 @@ public class SqsProducer {
         sqsService.sendMessage(defaultMessage.toJSON());
     }
 
+    public void sendMessageWithTemplate(String message) {
+        var defaultMessage = new DefaultMessage(message);
+        sqsService.sendMessageWithTemplate(defaultMessage.toJSON());
+    }
+
 }
